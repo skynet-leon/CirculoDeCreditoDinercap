@@ -83,7 +83,6 @@ public class Controla {
                        }
                        
                        String fechaTempUltimaCompraAntes = varload.getFechaUltimaCompra();
-                       
                         
                        varload.setFechaUltimaCompra(ultimaTx(
                                varload.getTarjeta(),
@@ -108,12 +107,16 @@ public class Controla {
                        String[] fechaUltimPago = ultimopag510(varload.getTarjeta(),
                                varload.getPeriodo(),
                                 conect);
+                       
+                       
                        if("19010101".equals(fechaUltimPago[0]))
                        {
                            fechaUltimPago = ultimopagws(varload.getTarjeta(),
                                    varload.getPeriodo(),
                                    conect);
+                           
                            varload.setFechaUltimoPago(fechaUltimPago[0]);
+                                                      
                            if("19010101".equals(fechaUltimPago[0]))
                            {
                                fechaUltimPago[0] = ultimopagPeriodoAnterior(varload.getCuentaProcesador(),
@@ -141,6 +144,7 @@ public class Controla {
                        }
                        varload.setClavePrevencion("0");
                        varload.setSaldoInsoluto(varload.getSaldoActual());
+                       
                        if (fechaUltimPago[1] == null)
                        {
                             varload.setMontoUltimoPago("0");
@@ -187,20 +191,21 @@ public class Controla {
                                     }
                                     
                                     varload.setNumeroPagosVencidos(diff);
-                                     varload.setPagoActual(diff);
+                                    varload.setPagoActual(diff);
                                 }
                        }
                         catch(Exception ex)
                         {
                             
                         }
-                       if ("0".equals(varload.getSaldoVencido()))
+                       
+                       if ("0.0".equals(varload.getSaldoVencido()))
                        {
                            varload.setPagoActual("v");
                            varload.setNumeroPagosVencidos("0");
                        }
-                       
-                       
+                      
+                           
                        
                        //
                        varload.setValorActivoValuacion("");
@@ -225,7 +230,6 @@ public class Controla {
                        varload.setNombreOtorgante_3("");
                        varload.setDomicilioDevolucion("");
                        varload.setGarantia("");
-                       
                        
                        //
                        insertaVars(varload,conect);
