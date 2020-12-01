@@ -15,6 +15,7 @@ public class Circulo_de_credito {
 
       
         PeriodoGlobal = args[0];
+      //  PeriodoGlobal = "20201010";
         Controla controla = new Controla();
     
         controla.cargaInfoStat(PeriodoGlobal);
